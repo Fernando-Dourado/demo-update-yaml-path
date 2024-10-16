@@ -48,7 +48,7 @@ pipeline:
                       type: KubernetesDirect
                       spec:
                         connectorRef: <+input>
-                        namespace: <+input>
+                        namespace: <+pipeline.stages.Cold.spec.infra.namespace>
               service:
                 useFromStage:
                   stage: Cold
