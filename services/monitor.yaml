@@ -1,0 +1,5 @@
+service:
+  name: monitor
+  identifier: monitor
+  orgIdentifier: GitX
+  projectIdentifier: Demo_Update_YAML_Path
