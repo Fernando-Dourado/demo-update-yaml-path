@@ -1,0 +1,6 @@
+overrides:
+  variables:
+    - name: SubscriptionID
+      type: String
+      value: def-ghi-jkl
+      required: false
