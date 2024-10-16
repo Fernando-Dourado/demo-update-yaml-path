@@ -1,0 +1,40 @@
+inputSet:
+  name: entry-point
+  identifier: entrypoint
+  orgIdentifier: GitX
+  projectIdentifier: Demo_Update_YAML_Path
+  pipeline:
+    identifier: Golden_Production
+    stages:
+      - stage:
+          identifier: Cold
+          template:
+            templateInputs:
+              type: Deployment
+              spec:
+                environment:
+                  infrastructureDefinitions:
+                    - identifier: cold
+                      inputs:
+                        identifier: cold
+                        type: KubernetesDirect
+                        spec:
+                          connectorRef: <+input>.executionInput()
+                          namespace: <+input>.executionInput()
+                service:
+                  serviceRef: entrypoint
+      - stage:
+          identifier: Disaster
+          template:
+            templateInputs:
+              type: Deployment
+              spec:
+                environment:
+                  infrastructureDefinitions:
+                    - identifier: warm
+                      inputs:
+                        identifier: warm
+                        type: KubernetesDirect
+                        spec:
+                          connectorRef: <+input>.executionInput()
+                          namespace: <+pipeline.stages.Cold.spec.infra.namespace>
