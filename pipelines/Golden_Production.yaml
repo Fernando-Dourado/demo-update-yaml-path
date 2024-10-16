@@ -1,0 +1,54 @@
+pipeline:
+  name: Golden Production
+  identifier: Golden_Production
+  projectIdentifier: Demo_Update_YAML_Path
+  orgIdentifier: GitX
+  tags: {}
+  stages:
+    - stage:
+        name: Cold
+        identifier: Cold
+        tags: {}
+        template:
+          templateRef: Rolling
+          versionLabel: v1
+          gitBranch: main
+          templateInputs:
+            type: Deployment
+            spec:
+              environment:
+                environmentRef: prod
+                infrastructureDefinitions:
+                  - identifier: cold
+                    inputs:
+                      identifier: cold
+                      type: KubernetesDirect
+                      spec:
+                        connectorRef: <+input>
+                        namespace: <+input>
+              service:
+                serviceRef: <+input>
+                serviceInputs: <+input>
+    - stage:
+        name: Disaster
+        identifier: Disaster
+        tags: {}
+        template:
+          templateRef: Rolling
+          versionLabel: v2
+          templateInputs:
+            type: Deployment
+            spec:
+              environment:
+                environmentRef: prod
+                infrastructureDefinitions:
+                  - identifier: warm
+                    inputs:
+                      identifier: warm
+                      type: KubernetesDirect
+                      spec:
+                        connectorRef: <+input>
+                        namespace: <+input>
+              service:
+                useFromStage:
+                  stage: Cold
