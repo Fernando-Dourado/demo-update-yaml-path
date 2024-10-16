@@ -1,5 +1,6 @@
 inputSet:
   name: entry-point
+  tags: {}
   identifier: entrypoint
   orgIdentifier: GitX
   projectIdentifier: Demo_Update_YAML_Path
