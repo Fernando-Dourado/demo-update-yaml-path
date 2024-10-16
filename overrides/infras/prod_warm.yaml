@@ -1,0 +1,17 @@
+overrides:
+  variables:
+    - name: SubscriptionID
+      type: String
+      value: abc-def-ghi
+      required: false
+  manifests:
+    - manifest:
+        identifier: manifest1
+        type: Values
+        spec:
+          store:
+            spec:
+              files:
+                - /override-sample.yaml
+              secretFiles: null
+            type: Harness
