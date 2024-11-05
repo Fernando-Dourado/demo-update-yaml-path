@@ -1,0 +1,31 @@
+pipeline:
+  name: PIPE-22931
+  identifier: PIPE22931
+  projectIdentifier: FernandoD
+  orgIdentifier: default
+  description: trigger execution working even though configuration is incorrect
+  tags: {}
+  stages:
+    - stage:
+        name: custom
+        identifier: custom
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: Say Hi
+                  identifier: Say_Hi
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo "Hi"
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+        tags: {}
